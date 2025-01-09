@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Interview</title>
+    <link rel="stylesheet" th:href="@{/css/interviewView.css}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}">
+                        <span class="material-icons">person</span> Candidate
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span> Job
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">event</span> Interview
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/user}">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:href="@{/login}">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>Interview Schedule</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <hr>
+        <div class="from-container">
+            <a style=" color: inherit;" th:href="@{/interview/interviewer/{username}(username=${username})}" >Interview Schedule List</a>
+            <span> &gt; </span>
+            <a style="text-decoration: none ; color: inherit;" href="#"> Interview Schedule Detail </a>
+
+            <hr>
+            <div class="job-details">
+                <div class="form-group">
+                    <label>Schedule Title: </label> <span th:text="${viewInterviewer.title}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Candidate Name: </label> <span th:text="${viewInterviewer.candidateName}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Schedule Time: </label> <span th:text="${viewInterviewer.schedule}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Job: </label> <span th:text="${viewInterviewer.job}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Interviewer: </label> <span th:text="${viewInterviewer.interviewer}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Location: </label>  <span th:text="${viewInterviewer.location}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Recruiter owner: </label> <span th:text="${viewInterviewer.recruiterOwner}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Meeting ID: </label> <span th:text="${viewInterviewer.meetingID}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Result: </label> <span th:text="${viewInterviewer.result}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Status: </label> <span th:text="${viewInterviewer.status}"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="button"> <a style="text-decoration: none; color: inherit;"
+                                              th:if="${viewInterviewer.status != 'Cancelled'}"
+                                              th:href="@{/interview/interviewer/showSubmit/{id}(id=${viewInterviewer.id})}">Submit Result</a>
+                        <span th:if="${viewInterviewer.status == 'Cancelled'}" style=" cursor: not-allowed;">Submit Result</span></button>
+                    <button type="button">
+                        <a th:href="@{/interview/interviewer/{username}(username=${username})}">
+                            Cancel
+                        </a>
+                    </button>
+
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

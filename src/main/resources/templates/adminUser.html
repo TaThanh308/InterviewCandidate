@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+    <link rel="stylesheet" th:href="@{/css/adminUser.css}" />
+    <script th:src="@{/js/adminUser.js}" defer></script>
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}">
+                        <span class="material-icons">person</span>Candidate</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span>Job</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}">
+                        <span class="material-icons">event</span>Interview</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{offer}">
+                        <span class="material-icons">local_offer</span>Offer</a
+                    >
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">account_circle</span>User
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:attr="onclick=|showDialog()|">
+                <span class="material-icons">logout</span>Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>User</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <header>
+            <div class="header-left">
+                <form th:action="@{/user/search}" method="get" id="searchForm">
+                    <input type="text" placeholder="Search..." class="search-bar" name="keyword" th:value="${keyword}"/>
+                    <select class="role-combobox" name="role">
+                        <option value="">Role</option>
+                        <option value="Admin" th:selected="${status == 'Admin'}">Admin</option>
+                        <option value="Recruiter" th:selected="${status == 'Recruiter'}">Recruiter</option>
+                        <option value="Interviewer" th:selected="${status == 'Interviewer'}">Interviewer</option>
+                        <option value="Manager" th:selected="${status == 'Manager'}">Manager</option>
+                    </select>
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>
+            <button class="add-new-button">Add New</button>
+        </header>
+        <section class="user-list">
+            <table>
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone No</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="userListDto: ${userlist}">
+                    <td th:text="${userListDto.username}"></td>
+                    <td th:text="${userListDto.email}"></td>
+                    <td th:text="${userListDto.phone}"></td>
+                    <td th:text="${userListDto.role}"></td>
+                    <td th:text="${userListDto.status}"></td>
+                    <td>
+                        <a th:href="@{/user/adminDetail/{email}(email=${userListDto.email})}" style="text-decoration: none ; color: inherit;"
+                        ><span class="material-icons" >visibility</span></a>
+                        <a th:href="@{/user/adminUpdate/{email}(email=${userListDto.email})}" style="text-decoration: none ; color: inherit;"
+                        ><span class="material-icons">edit</span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-container" th:if="${totalElements != 0}">
+                <div class="total-rows">
+                    <span th:text="'Total User: ' + ${totalElements}"></span><br>
+                    <span th:text="'Total Pages: ' + ${totalPages}"></span>
+                </div>
+                <div class="pagination-controls">
+                <span th:with="startPage=${currentPage > 1 ? currentPage - 1 : 1}, endPage=${currentPage + 1 > totalPages ? totalPages : currentPage + 1}">
+                    <span th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                        <a th:if="${i != currentPage}" th:href="@{'/user/adminList?page=' + ${i - 1}}" th:text="${i}"></a>
+                        <span th:if="${i == currentPage}" th:text="${i}" class="current"></span>
+                    </span>
+                </span>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<div class="overlay" id="confirmDialog">
+    <div class="dialog">
+        <p>Are you sure you want to log out?</p>
+        <button type="button" class="btn-no" onclick="closeDialog()">Cancel</button>
+        <button type="button" class="btn-yes">Yes</button>
+    </div>
+</div>
+</body>
+</html>

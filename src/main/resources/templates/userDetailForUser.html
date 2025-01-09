@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+    <link rel="stylesheet" th:href="@{/css/userDetailForUser.css}" />
+    <script th:src="@{/js/userDetailForUser.js}" defer></script>
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}" target="_self"
+                    ><span class="material-icons">home</span>Homepage</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}" target="_self">
+                        <span class="material-icons">person</span>Candidate</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}" target="_self">
+                        <span class="material-icons">work</span>Job</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}" target="_self">
+                        <span class="material-icons">event</span>Interview</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{offer}" target="_self">
+                        <span class="material-icons">local_offer</span>Offer</a
+                    >
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">account_circle</span>User
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:attr="onclick=|showDialog()|">
+                <span class="material-icons">logout</span>Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>User</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <h4>User Detail</h4>
+        <section class="user-details">
+            <form>
+                <div class="form-left">
+                    <label>Full name </label>
+                    <span th:text="${userView.name}"></span>
+                </div>
+                <div class="form-right">
+                    <label>Username </label>
+                    <span th:text="${userView.username}"></span>
+                </div>
+                <div class="form-left">
+                    <label>Email </label>
+                    <span th:text="${userView.email}"></span>
+                </div>
+                <div class="form-right">
+                    <label>D.O.B </label>
+                    <span th:text="${userView.dob}"></span>
+                </div>
+                <div class="form-left">
+                    <label>Address </label>
+                    <span th:text="${userView.address}"></span>
+                </div>
+                <div class="form-right">
+                    <label>Phone number </label>
+                    <span th:text="${userView.phone}"></span>
+                </div>
+                <div class="form-left">
+                    <label>Gender </label>
+                    <span th:text="${userView.gender}"></span>
+                </div>
+                <div class="form-right">
+                    <label>Roles </label>
+                    <span id="roles" th:text="${userView.role}"></span>
+                </div>
+                <div class="form-left">
+                    <label>Department *</label>
+                    <span th:text="${userView.department}"></span>
+                </div>
+                <div class="form-right">
+                    <label>Status </label>
+                    <span th:text="${userView.status}"></span>
+                </div>
+                <div class="form-left">
+                    <label>Note </label>
+                    <span th:text="${userView.notes}"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="edit-button" style="background-color: #4CAF50; color: white;">Edit</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</div>
+
+<div class="overlay" id="confirmDialog">
+    <div class="dialog">
+        <p>Are you sure you want to log out?</p>
+        <button type="button" class="btn-no" onclick="closeDialog()">Cancel</button>
+        <button type="button" class="btn-yes">Yes</button>
+    </div>
+</div>
+</body>
+</html>

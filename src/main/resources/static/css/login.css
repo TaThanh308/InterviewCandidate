@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-content {
+    text-align: center;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+.login-heading {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-form {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    color: #999999;
+}
+
+.input-label.active {
+    top: -15px;
+    font-size: 15px;
+    color: #000000;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="checkbox"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 360px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.forgot-password a {
+    float: right;
+    text-decoration: none;
+    color: #3498db;
+}
+
+.login-button {
+    padding: 10px;
+    width: 380px;
+    background-color: #60a9da;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #2980b9;
+}
+
+.function {
+    display: flex;
+    justify-content: space-between;
+}
+
+.function div {
+    width: 195px;
+    height: 20px;
+}
+

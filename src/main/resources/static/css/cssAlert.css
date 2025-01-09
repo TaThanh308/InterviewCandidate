@@ -1,0 +1,41 @@
+alert {
+    background-color: #f395cf; 
+    color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  alert {
+    font-family: Arial, sans-serif;
+    border-radius: 4px;
+  }
+  alert {
+    position: relative;
+    padding-right: 35px;
+  }
+  
+  alert::before {
+    content: "×";
+    position: absolute;
+    right: 15px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  alert:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  alert {
+    animation: fadeIn 0.5s;
+  }

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Job</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/jobCreate.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}">
+                        <span class="material-icons">person</span> Candidate
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">work</span> Job
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}">
+                        <span class="material-icons">event</span> Interview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/user}">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:href="@{/login}">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <div class="main-content">
+        <div class="top-bar">
+            <h1>Create Job</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <div class="breadcrumbs">
+            <a th:href="@{/job}">Job Schedule List</a>
+            <span> &gt; </span>
+            <a href="#">New Job Schedule</a>
+        </div>
+        <form class="job-form" th:action="@{/job/create}" th:object="${crJob}" method="post">
+            <div class="form-group">
+                <label for="job-title">Job title <span>*</span></label>
+                <input type="text" id="job-title" th:field="*{title}" name="title" th:classappend="${#fields.hasErrors('title')} ? 'input-error' : ''">
+                <span class="validation-message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            </div>
+            <div class="form-group">
+                <label for="start-date">Start Date <span>*</span></label>
+                <input type="date" id="start-date" th:field="*{startDate}" name="startDate" th:classappend="${#fields.hasErrors('startDate')} ? 'input-error' : ''">
+                <span class="validation-message" id="start-date-error" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span>
+            </div>
+            <div class="form-group">
+                <label for="salary-from">Salary Range</label>
+                <div class="salary-range">
+                    <input type="text" id="salary-from" th:field="*{salaryFrom}" name="salaryFrom" th:classappend="${#fields.hasErrors('salaryFrom')} ? 'input-error' : ''" placeholder="From">
+                    <input type="text" id="salary-to" th:field="*{salaryTo}" name="salaryTo" th:classappend="${#fields.hasErrors('salaryTo')} ? 'input-error' : ''" placeholder="To">
+                </div>
+                <span class="validation-message" id="salary-from-error" th:if="${#fields.hasErrors('salaryFrom')}" th:errors="*{salaryFrom}"></span>
+                <span class="validation-message" id="salary-to-error" th:if="${#fields.hasErrors('salaryTo')}" th:errors="*{salaryTo}"></span>
+            </div>
+            <div class="form-group">
+                <label for="working-address">Working address</label>
+                <input type="text" id="working-address" th:field="*{workingAddress}" name="workingAddress" th:classappend="${#fields.hasErrors('workingAddress')} ? 'input-error' : ''" placeholder="Working address">
+                <span class="validation-message" th:if="${#fields.hasErrors('workingAddress')}" th:errors="*{workingAddress}"></span>
+            </div>
+            <div class="form-group">
+                <label for="skills">Skills <span>*</span></label>
+                <select id="skills" th:field="*{skills}" name="skills" multiple="multiple">
+                    <option value="Java">Java</option>
+                    <option value="Nodejs">Nodejs</option>
+                    <option value=".Net">.Net</option>
+                    <option value="C++">C++</option>
+                    <option value="Business analysis">Business analysis</option>
+                    <option value="Communication">Communication</option>
+                </select>
+                <span class="validation-message" th:if="${#fields.hasErrors('skills')}" th:errors="*{skills}"></span>
+            </div>
+            <div class="form-group">
+                <label for="end-date">End Date <span>*</span></label>
+                <input type="date" id="end-date" th:field="*{endDate}" name="endDate" th:classappend="${#fields.hasErrors('endDate')} ? 'input-error' : ''">
+                <span class="validation-message" id="end-date-error" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
+            </div>
+            <div class="form-group">
+                <label for="benefits">Benefits <span>*</span></label>
+                <select id="benefits" th:field="*{benefits}" name="benefits" multiple="multiple">
+                    <option value="Travel">Travel</option>
+                    <option value="25-day leave">25-day leave</option>
+                    <option value="Hybrid working">Hybrid working</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Healthcare insurance">Healthcare insurance</option>
+                </select>
+                <span class="validation-message" th:if="${#fields.hasErrors('benefits')}" th:errors="*{benefits}"></span>
+            </div>
+            <div class="form-group">
+                <label for="level">Level <span>*</span></label>
+                <select id="level" th:field="*{level}" name="level" multiple="multiple">
+                    <option value="Fresher">Fresher</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Senior">Senior</option>
+                    <option value="Leader">Leader</option>
+                    <option value="Manager">Manager</option>
+                    <option value="VH">Vice Head</option>
+                </select>
+                <span class="validation-message" th:if="${#fields.hasErrors('level')}" th:errors="*{level}"></span>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" th:field="*{description}" name="description" rows="4" th:classappend="${#fields.hasErrors('description')} ? 'input-error' : ''"></textarea>
+                <span class="validation-message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+            </div>
+            <div class="form-group">
+                <label for="status">Status <span>*</span></label>
+                <select id="status" th:field="*{status}" name="status" th:classappend="${#fields.hasErrors('status')} ? 'input-error' : ''">
+                    <option value="DRAFT">DRAFT</option>
+                    <option value="OPEN">OPEN</option>
+                    <option value="CLOSED">CLOSED</option>
+                </select>
+                <span class="validation-message" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" class="submit-btn">Create</button>
+                <button type="button" onclick="window.location.href='/job'">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#skills').select2();
+        $('#benefits').select2();
+        $('#level').select2();
+    });
+</script>
+</body>
+</html>

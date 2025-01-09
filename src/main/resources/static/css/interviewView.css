@@ -1,0 +1,275 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 150px;
+    background-color: #2c3e50;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.nav li {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.nav li.active {
+    background-color: white;
+    color: #2c3e50;
+}
+
+.nav li:hover {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+.nav .material-icons {
+    margin-right: 10px;
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-item a:hover {
+    color: #2c3e50;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 110px;
+}
+
+.logout:hover {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+.logout a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.logout a:hover {
+    color: #2c3e50;
+}
+
+.logout .material-icons {
+    margin-right: 10px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    margin-left: 150px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 10px;
+}
+
+.top-bar h1 {
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    margin-right: 10px;
+}
+
+.user-icon {
+    cursor: pointer;
+}
+
+.job-details {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: inline-block;
+    width: 150px;
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+.form-actions button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+}
+
+.form-actions a {
+    color: white;
+    text-decoration: none;
+}
+
+.add-new-button:hover {
+    background-color: #3498db;
+}
+
+.add-new-button.cancel-button {
+    background-color: #f39c12; /* Màu nền của nút */
+    color: #fff; /* Màu chữ */
+    padding: 10px 20px; /* Kích thước của nút */
+    border: none; /* Bỏ viền */
+    border-radius: 4px; /* Bo tròn góc */
+    margin-left: 10px; /* Khoảng cách với nút khác */
+}
+
+.add-new-button.cancel-button:hover {
+    background-color: #e67e22; /* Màu nền khi hover */
+    cursor: pointer; /* Con trỏ tay khi hover */
+}
+.add-new-button.send-email-button {
+    background-color: #e74c3c; /* Màu nền của nút */
+    color: #fff; /* Màu chữ */
+    padding: 10px 20px; /* Kích thước của nút */
+    border: none; /* Bỏ viền */
+    border-radius: 4px; /* Bo tròn góc */
+    margin-right: 20px; /* Khoảng cách với nút khác */
+}
+
+.add-new-button.send-email-button:hover {
+    background-color: #c0392b; /* Màu nền khi hover */
+    cursor: pointer; /* Con trỏ tay khi hover */
+}
+
+.modal {
+    display: none; /* Ẩn modal mặc định */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* Màu nền, độ mờ */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 20% auto; /* Điều chỉnh vị trí modal xuống 20% từ top */
+    padding: 10px; /* Giảm padding của modal */
+    border: 1px solid #888;
+    width: 30%; /* Giảm chiều rộng của modal xuống 30% */
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal-content p {
+    margin-bottom: 30px; /* Thêm khoảng cách giữa nội dung và các nút */
+}
+
+.modal-content div button {
+    margin: 30px; /* Thêm khoảng cách giữa các nút */
+}
+
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Đặt chung cho cả hai nút */
+.modal-content div button {
+    margin: 10px; /* Thêm khoảng cách giữa các nút */
+    padding: 10px 20px; /* Điều chỉnh padding của nút */
+    font-size: 16px; /* Tăng kích thước font chữ */
+    border: none;
+    border-radius: 5px; /* Thêm bo góc cho nút */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Thêm hiệu ứng chuyển động */
+}
+
+/* Cài đặt riêng cho nút "Yes" */
+.modal-content div button:nth-child(1) {
+    background-color: #4CAF50; /* Màu nền cho nút "Yes" */
+    color: white; /* Màu chữ */
+}
+
+.modal-content div button:nth-child(1):hover {
+    background-color: #45a049; /* Màu nền khi hover cho nút "Yes" */
+    transform: scale(1.05); /* Phóng to khi hover */
+}
+
+/* Cài đặt riêng cho nút "No" */
+.modal-content div button:nth-child(2) {
+    background-color: #f44336; /* Màu nền cho nút "No" */
+    color: white; /* Màu chữ */
+}
+
+.modal-content div button:nth-child(2):hover {
+    background-color: #e53935; /* Màu nền khi hover cho nút "No" */
+    transform: scale(1.05); /* Phóng to khi hover */
+}

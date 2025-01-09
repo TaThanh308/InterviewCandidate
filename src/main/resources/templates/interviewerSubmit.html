@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Interviewer</title>
+    <link rel="stylesheet" th:href="@{/css/interviewUpdate.css}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}">
+                        <span class="material-icons">person</span> Candidate
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span> Job
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">event</span> Interview
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/user}">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:href="@{/login}">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>Interview Schedule</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}">Username</span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <a style=" color: inherit;" th:href="@{/interview/interviewer/{username}(username=${username})}" >Interview Schedule List</a>
+            <span> &gt; </span>
+            <a style="text-decoration: none ; color: inherit;" href="#"> Interview Schedule Submit Result</a>
+            <hr>
+            <form class="schedule-form" th:action="@{/interview/interviewer/submitEdit}" th:object="${submit}" method="post">
+                <div class="form-section">
+                    <input type="hidden" th:field="*{id}" />
+                    <label for="title">Schedule title</label>
+                    <input id="title" name="title" readonly th:field="*{scheduleTitle}">
+                </div>
+                <div class="form-section">
+                    <label>Candidate name</label>
+                    <div>
+                        <p style=" padding: 10px;   border: 1px solid #ccc; border-radius: 4px;" th:text="${submit.candidateName}"></p>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <label for="schedule-time">Schedule Time</label>
+                    <input id="schedule-time" name="scheduleTime" readonly th:field="*{scheduleTime}">
+                    <div class="time-input">
+                        <label for="schedule-from">From:</label>
+                        <input id="schedule-from" name="scheduleFrom" readonly th:field="*{scheduleFrom}">
+                    </div>
+                    <div class="time-input">
+                        <label for="schedule-to">To:</label>
+                        <input id="schedule-to" name="scheduleTo" readonly th:field="*{scheduleTo}">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <label for="job">Job</label>
+                    <input id="job" name="job" readonly th:field="*{job}">
+                </div>
+                <div class="form-section">
+                    <label for="interviewer">Interviewer</label>
+                    <input id="interviewer" name="interview" readonly th:field="*{interview}">
+                </div>
+                <div class="form-section">
+                    <label for="location">Location</label>
+                    <input id="location" name="location" readonly th:field="*{location}">
+                </div>
+                <div class="form-section">
+                    <label for="recruiter">Recruiter owner</label>
+                    <input id="recruiter" name="recruiterOwner" readonly th:field="*{recruiterOwner}">
+                </div>
+                <div class="form-section">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" name="notes" placeholder="Type schedule note..." th:field="*{notes}"></textarea>
+                </div>
+                <div class="form-section">
+                    <label for="meeting-id">Meeting ID</label>
+                    <input id="meeting-id" name="meeting-id" readonly th:field="*{meetingID}">
+                </div>
+                <div class="form-section">
+                    <label for="status">Status</label>
+                    <input id="status" name="status" readonly th:field="*{status}">
+                </div>
+                <div class="form-section">
+                    <label for="result">Result <span class="required">*</span></label>
+                    <select id="result" name="result">
+                        <option value="" disabled selected>Select a result...</option>
+                        <option value="Passed">Passed</option>
+                        <option value="Failed">Failed</option>
+                    </select>
+                    <div id="result-error" class="error" style="display: none;">This field is required.</div>
+                </div>
+                <hr>
+                <div class="form-actions">
+                    <button type="submit">Submit Result</button>
+                    <button type="button">
+                        <a style="text-decoration: none; color: inherit;" th:href="@{/interview/interviewer/{username}(username=${username})}">
+                            Cancel
+                        </a>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector(".schedule-form");
+        const resultSelect = document.getElementById("result");
+        const resultError = document.getElementById("result-error");
+
+        form.addEventListener("submit", function(event) {
+            // Hide the error message by default
+            resultError.style.display = "none";
+
+            if (resultSelect.value === "") {
+                // Prevent the form from being submitted
+                event.preventDefault();
+                // Show the error message
+                resultError.style.display = "block";
+            }
+        });
+    });
+</script>
+</body>
+</html>

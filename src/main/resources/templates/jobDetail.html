@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/jobDetail.css}">
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a href="/homepage">
+                        <span class="material-icons">home</span>Homepage
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/candidate">
+                        <span class="material-icons">person</span> Candidate
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">work</span> Job
+                </li>
+                <li class="nav-item">
+                    <a href="/interview">
+                        <span class="material-icons">event</span> Interview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a href="/user">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a href="/login">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <div class="main-content">
+        <div class="top-bar">
+            <h1>Job Details</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <div class="job-details">
+            <div class="form-group">
+                <label>Job title:</label>
+                <span th:text="${job.title}"> </span>
+            </div>
+            <div class="form-group">
+                <label>Start Date:</label>
+                <span th:text="${job.startDate}"></span>
+            </div>
+            <div class="form-group">
+                <label>Salary Range:</label>
+                <div class="salary-range">
+                    <span th:text="'From: ' + ${job.salaryFrom}"></span>
+                    <span th:text="'To: ' + ${job.salaryTo}"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Working Address :</label>
+                <span th:text="${job.workingAddress}"></span>
+            </div>
+            <div class="form-group">
+                <label>Status:</label>
+                <span th:text="${job.status}"></span>
+            </div>
+            <div class="form-group">
+                <label>Required Skills:</label>
+                <span th:text="${job.skills}"></span>
+            </div>
+            <div class="form-group">
+                <label>End Date:</label>
+                <span th:text="${job.endDate}"></span>
+            </div>
+            <div class="form-group">
+                <label>Benefits :</label>
+                <span th:text="${job.benefits}"></span>
+            </div>
+            <div class="form-group">
+                <label>Level:</label>
+                <span th:text="${job.level}"></span>
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <span th:text="${job.description}"></span>
+            </div>
+            <div class="form-actions">
+                <a th:href="@{'/job/edit/' + ${job.jobId}}" class="edit-button">Edit</a>
+                <a th:href="@{'/job'}" class="cancel-button">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

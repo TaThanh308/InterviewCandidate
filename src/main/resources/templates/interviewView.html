@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Interview</title>
+    <link rel="stylesheet" th:href="@{/css/interviewView.css}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}">
+                        <span class="material-icons">person</span> Candidate
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span> Job
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">event</span> Interview
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/user}">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:href="@{/login}">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>Interview Schedule</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+
+        <div class="from-container">
+            <a style=" color: inherit;" th:href="@{/interview}" >Interview Schedule List</a>
+            <span> &gt; </span>
+            <a style="text-decoration: none ; color: inherit;" th:href="@{/interview/showCreate}">Interview Schedule Details</a>
+
+            <button class="add-new-button cancel-button" th:onclick="'openModal(' + ${viewInterviewDto.id} + ')'">Cancel Schedule</button>
+            <form th:action="@{/interview/sendEmail}" method="post" style="display: inline-block;">
+                <input type="hidden" name="interviewId" th:value="${viewInterviewDto.id}" />
+                <button type="submit" class="add-new-button send-email-button">Send To Email</button>
+            </form>
+
+
+            <hr>
+            <div class="job-details">
+                <div class="form-group">
+                    <label>Schedule Title: </label> <span th:text="${viewInterviewDto.title}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Candidate Name: </label> <span th:text="${viewInterviewDto.candidateName}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Schedule Time: </label> <span th:text="${viewInterviewDto.schedule}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Job: </label> <span th:text="${viewInterviewDto.job}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Interviewer: </label> <span th:text="${viewInterviewDto.interviewer}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Location: </label>  <span th:text="${viewInterviewDto.location}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Recruiter owner: </label> <span th:text="${viewInterviewDto.recruiterOwner}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Meeting ID: </label> <span th:text="${viewInterviewDto.meetingID}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Result: </label> <span th:text="${viewInterviewDto.result}"></span>
+                </div>
+                <div class="form-group">
+                    <label>Status: </label> <span th:text="${viewInterviewDto.status}"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="button"> <a th:href="@{/interview/showEdit/{id}(id=${viewInterviewDto.id})}">Edit</a></button>
+                    <button type="button"><a th:href="@{/interview}">Cancel</a></button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="cancelModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Are you sure you want to cancel the schedule?</p>
+            <div>
+                <button onclick="confirmCancellation()">Yes</button>
+                <button onclick="closeModal()">No</button>
+            </div>
+        </div>
+    </div>
+    <form id="cancelForm" th:action="@{/interview/cancelSchedule}" method="post" style="display:none;">
+        <input type="hidden" name="id" id="id" th:value="${id}">
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Function to open the modal and set the schedule ID
+    window.openModal = function(id) {
+        $('#id').val(id); // Set the schedule ID in the hidden form
+        $('#cancelModal').css('display', 'block'); // Show the modal
+    };
+
+    // Function to close the modal
+    window.closeModal = function() {
+        $('#cancelModal').css('display', 'none'); // Hide the modal
+    };
+
+    // Function to submit the cancellation form
+    window.confirmCancellation = function() {
+        $('#cancelForm').submit(); // Submit the hidden form
+    };
+</script>
+
+<!-- Thymeleaf alert messages -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var successMessage = [[${successMessage}]];
+    var errorMessage = [[${errorMessage}]];
+    if (successMessage) {
+        alert(successMessage);
+    }
+    if (errorMessage) {
+        alert(errorMessage);
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

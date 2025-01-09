@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Create Candidate</title>
+    <link rel="stylesheet" th:href="@{/css/candidateCreate.css}" />
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">person</span> Candidate
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span> Job
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}">
+                        <span class="material-icons">event</span> Interview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/user}">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:href="@{/login}">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>Candidate</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <h2>Create Candidate</h2>
+        <form th:action="@{/candidate/create}" method="post" th:object="${candidatePostDto}"
+              enctype="multipart/form-data">
+            <h4>Personal Information</h4>
+            <hr />
+            <div class="form-group">
+                <label for="fullName">Full Name<span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" th:field="*{name}"
+                       placeholder="Type a name...">
+                <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+            <div class="form-group">
+                <label for="dob">D.O.B</label>
+                <input type="date" id="dob" name="dob" th:field="*{dob}">
+                <span class="error" th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></span>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" th:field="*{phone}"
+                       placeholder="Type a number...">
+                <span class="error" th:if="${#fields.hasErrors('phone')}"
+                      th:errors="*{phone}"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email<span class="required">*</span></label>
+                <input type="text" id="email" name="email" th:field="*{email}"
+                       placeholder="Type an email...">
+                <span class="error" th:if="${#fields.hasErrors('email')}"
+                      th:errors="*{email}"></span>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" th:field="*{address}"
+                       placeholder="Type an address...">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender<span class="required">*</span></label>
+                <select id="gender" name="gender" >
+                    <option value="" disabled selected>Select a gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <span class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+            </div>
+
+            <h4>Professional Information</h4>
+            <hr />
+            <div class="form-group">
+                <label for="cv">CV Attachment</label>
+                <input type="file" id="cv" name="cv" th:field="*{cv}" placeholder="cv.pdf">
+            </div>
+            <div class="form-group">
+                <label for="position">Position<span class="required">*</span></label>
+                <select id="position" name="position" >
+                    <option value="" disabled selected>Select a position</option>
+                    <option value="Backend Developer">Backend Developer</option>
+                    <option value="Business Analyst">Business Analyst</option>
+                    <option value="Tester">Tester</option>
+                    <option value="HR">HR</option>
+                    <option value="Project Manager">Project Manager</option>
+                </select>
+                <span class="error" th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
+            </div>
+            <div class="form-group">
+                <label for="skills">Skills<span class="required">*</span></label>
+                <div class="selected-skills" id="selected-skills"></div>
+                <div class="select-wrapper">
+                    <select id="skills" name="skills">
+                        <option value="" disabled selected>Select skills</option>
+                        <option value="Java">Java</option>
+                        <option value="Nodejs">Nodejs</option>
+                        <option value=".net">.net</option>
+                        <option value="C++">C++</option>
+                        <option value="Business analysis">Business analysis</option>
+                        <option value="Communication">Communication</option>
+                    </select>
+                    <input type="hidden" id="selectedSkills" name="selectedSkills" th:field="*{skills}"/>
+                    <span class="error" th:if="${#fields.hasErrors('skills')}" th:errors="*{skills}"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="recruiter">Recruiter<span class="required">*</span></label>
+                <select id="recruiter" name="recruiter" >
+                    <option value="" disabled selected>Recruiter name</option>
+                    <option th:each="recruiter : ${recruiterList}"
+                            th:value="${recruiter.username}"
+                            th:text="${recruiter.username}"></option>
+                </select>
+                <span class="error" th:if="${#fields.hasErrors('recruiter')}" th:errors="*{recruiter}"></span>
+            </div>
+            <div class="form-group">
+                <label for="note">Note</label>
+                <textarea id="note" name="note" th:field="*{notes}" placeholder="N/A"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="status">Status<span class="required">*</span></label>
+                <select id="status" name="status" >
+                    <option value="Open">Open</option>
+                    <option value="Banned">Banned</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="yearOfExperience">Year of Experience</label>
+                <input type="number" id="yearOfExperience" name="yearOfExperience" min="0"
+                       th:field="*{yearOfExperience}" placeholder="Type a number">
+            </div>
+            <div class="form-group">
+                <label for="highestLevel">Highest Level<span class="required">*</span></label>
+                <select id="highestLevel" name="highestLevel" >
+                    <option value="" disabled selected>Select highest level</option>
+                    <option value="High school">High school</option>
+                    <option value="Bachelor’s Degree">Bachelor’s Degree</option>
+                    <option value="Master Degree">Master Degree</option>
+                    <option value="PhD">PhD</option>
+                </select>
+                <span class="error" th:if="${#fields.hasErrors('highestLevel')}" th:errors="*{highestLevel}"></span>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" class="submit-button">Submit</button>
+                <button type="reset" class="reset-button">Reset</button>
+                <button type="button" class="cancel-button">Cancel</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.cancel-button').addEventListener('click', function () {
+            window.location.href = '/candidate';
+        });
+
+        function addSkill() {
+            const selectElement = document.getElementById('skills');
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+            if (!selectedOption.disabled) {
+                const selectedSkillsContainer = document.getElementById('selected-skills');
+
+                const skillDiv = document.createElement('div');
+                skillDiv.classList.add('selected-skill');
+                skillDiv.textContent = selectedOption.text;
+
+                const removeSpan = document.createElement('span');
+                removeSpan.textContent = 'x';
+                removeSpan.addEventListener('click', () => {
+                    selectedOption.disabled = false;
+                    selectedOption.selected = false;
+                    skillDiv.remove();
+                    updateSelectedSkills(); // Cập nhật giá trị trường ẩn khi một kỹ năng được xóa
+                });
+
+                skillDiv.appendChild(removeSpan);
+                selectedSkillsContainer.appendChild(skillDiv);
+
+                selectedOption.disabled = true;
+
+                updateSelectedSkills(); // Cập nhật giá trị trường ẩn khi một kỹ năng được thêm
+            }
+        }
+
+        function updateSelectedSkills() {
+            const selectedSkills = [];
+            const selectedSkillDivs = document.querySelectorAll('.selected-skill');
+            selectedSkillDivs.forEach(skillDiv => {
+                let skillText = skillDiv.textContent.trim();
+                let skill = skillText.slice(0, -1); // Loại bỏ ký tự 'x' ở cuối chuỗi
+                selectedSkills.push(skill);
+            });
+
+            const selectedSkillsInput = document.getElementById('selectedSkills');
+            selectedSkillsInput.value = selectedSkills.join(', ');
+        }
+
+        const skillsSelect = document.getElementById('skills');
+        skillsSelect.addEventListener('change', addSkill);
+    });
+</script>
+</body>
+</html>

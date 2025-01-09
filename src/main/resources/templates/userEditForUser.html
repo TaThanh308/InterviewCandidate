@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+    <link rel="stylesheet" th:href="@{/css/userEditForUser.css}" />
+    <script th:src="@{/js/userEditForUser.js}" defer></script>
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}" target="_self"
+                    ><span class="material-icons">home</span>Homepage</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}" target="_self">
+                        <span class="material-icons">person</span>Candidate</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}" target="_self">
+                        <span class="material-icons">work</span>Job</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}" target="_self">
+                        <span class="material-icons">event</span>Interview</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{offer}" target="_self">
+                        <span class="material-icons">local_offer</span>Offer</a
+                    >
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">account_circle</span>User
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:attr="onclick=|showDialog()|">
+                <span class="material-icons">logout</span>Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>User</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <section class="user-list">
+            <h4>Update User</h4>
+            <form class="form-group" th:action="@{/user/userUpdate}" th:object="${userUpdate}" method="post">
+                <div class="form-left">
+                    <label for="name">Full Name </label>
+                    <input
+                            type="text" id="name"
+                            th:value="${userUpdate != null ? userUpdate.name : ''}"
+                            th:field="*{name}"
+                            placeholder="Type a name..."/>
+                </div>
+                <div class="form-right">
+                    <label for="username">Username </label>
+                    <input
+                            type="text"
+                            id="username"
+                            th:value="${userUpdate != null ? userUpdate.username : ''}"
+                            th:field="*{username}"
+                            placeholder="Type a username..."
+                    />
+                </div>
+                <div class="form-left">
+                    <label for="email">Email </label>
+                    <input
+                            type="email"
+                            id="email"
+                            th:value="${userUpdate != null ? userUpdate.email : ''}"
+                            th:field="*{email}"
+                            placeholder="Type an email..." />
+                </div>
+                <div class="form-right">
+                    <label for="dob">D.O.B</label>
+                    <input
+                            type="date"
+                            id="dob"
+                            th:value="${userUpdate != null ? userUpdate.dob : ''}"
+                            th:field="*{dob}"
+                            placeholder="DD/MM/YYYY"/>
+                </div>
+                <div class="form-left">
+                    <label for="address">Address</label>
+                    <input
+                            type="text"
+                            id="address"
+                            th:value="${userUpdate != null ? userUpdate.address : ''}"
+                            th:field="*{address}"
+                            placeholder="Type an address..."
+                    />
+                </div>
+                <div class="form-right">
+                    <label for="phone">Phone number</label>
+                    <input
+                            type="tel"
+                            id="phone"
+                            th:value="${userUpdate != null ? userUpdate.phone : ''}"
+                            th:field="*{phone}"
+                            placeholder="Type a number..."/>
+                </div>
+                <div class="form-left">
+                    <label for="gender">Gender </label>
+                    <select id="gender" th:value="${userUpdate != null ? userUpdate.gender : ''}" th:field="*{gender}" required>
+                        <option value="">Select a gender...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-right">
+                    <label for="roles">Roles </label>
+                    <input type="text" id="roles" th:value="${userUpdate != null ? userUpdate.role : ''}" th:field="*{role}" readonly/>
+
+                </div>
+                <div class="form-left">
+                    <label for="department">Department </label>
+                    <input type="text" id="department" th:value="${userUpdate != null ? userUpdate.department : ''}" th:field="*{department}" readonly/>
+
+                </div>
+                <div class="form-right">
+                    <label>Status </label>
+                    <input type="text" id="status" th:value="${userUpdate != null ? userUpdate.status : ''}" th:field="*{status}" readonly/>
+                </div>
+                <div class="form-left">
+                    <label for="note">Note</label>
+                    <input type="text" id="note" th:value="${userUpdate != null ? userUpdate.notes : ''}" th:field="*{notes}" placeholder="N/A" />
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-button">Submit</button>
+                    <button type="button" class="cancel-button">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</div>
+<div class="overlay" id="confirmDialog">
+    <div class="dialog">
+        <p>Are you sure you want to log out?</p>
+        <button type="button" class="btn-no" onclick="closeDialog()">Cancel</button>
+        <button type="button" class="btn-yes">Yes</button>
+    </div>
+</div>
+</body>
+</html>

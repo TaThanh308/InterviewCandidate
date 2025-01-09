@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate Detail</title>
+    <link rel="stylesheet" th:href="@{/css/candidateDetail.css}" />
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}">
+                        <span class="material-icons">person</span> Candidate
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span> Job
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}">
+                        <span class="material-icons">event</span> Interview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/user}">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:href="@{/login}">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>Candidate Detail</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <header>
+            <button class="ban-button" th:attr="onclick='showBanDialog(\'' + ${candidate.id} + '\')'">
+                Ban Candidate</button>
+        </header>
+        <div class="candidate-details">
+            <h2>Personal Information</h2>
+            <hr />
+            <div class="detail-group">
+                <label>Full Name:</label>
+                <span th:text="${candidate.name}"></span>
+            </div>
+            <div class="detail-group">
+                <label>D.O.B:</label>
+                <span th:text="${candidate.dob}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Phone Number:</label>
+                <span th:text="${candidate.phone}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Email:</label>
+                <span th:text="${candidate.email}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Address:</label>
+                <span th:text="${candidate.address}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Gender:</label>
+                <span th:text="${candidate.gender}"></span>
+            </div>
+
+            <h2>Professional Information</h2>
+            <hr />
+            <div class="detail-group">
+                <label>CV Attachment:</label>
+                <span th:text="${candidate.cv}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Position:</label>
+                <span th:text="${candidate.position}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Skills:</label>
+                <span th:text="${candidate.skills}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Recruiter:</label>
+                <span th:text="${candidate.recruiter}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Note:</label>
+                <span th:text="${candidate.notes}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Status:</label>
+                <span th:text="${candidate.status}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Year of Experience:</label>
+                <span th:text="${candidate.yearOfExperience}"></span>
+            </div>
+            <div class="detail-group">
+                <label>Highest Level:</label>
+                <span th:text="${candidate.highestLevel}"></span>
+            </div>
+        </div>
+        <div class="form-buttons">
+            <button type="button" class="edit-button">Edit</button>
+            <button type="button" class="cancel-button">Cancel</button>
+        </div>
+        <span id="ID" th:text="${candidate.id}" style="display: none;"></span>
+    </main>
+</div>
+
+<div class="overlay" id="confirmBanDialog">
+    <form class="dialog" method="post" action="" id="banForm">
+        <p>Are you sure you want to ban this candidate?</p>
+        <button type="submit" class="btn-yes">Yes</button>
+        <button type="button" class="btn-no" onclick="closeBanDialog()">No</button>
+    </form>
+</div>
+
+<script>
+    function showBanDialog(id) {
+        document.getElementById('banForm').action = '/candidate/ban/' + id;
+        document.getElementById('confirmBanDialog').style.display = 'flex';
+    }
+
+    function closeBanDialog() {
+        document.getElementById('confirmBanDialog').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.edit-button').addEventListener('click', function () {
+            const idElement = document.getElementById('ID');
+            const iD = parseInt(idElement.textContent.trim());
+            window.location.href = '/candidate/form/update/' + iD;
+        });
+
+        document.querySelector('.cancel-button').addEventListener('click', function () {
+            window.location.href = '/candidate';
+        });
+    });
+</script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const success = /*[[${success}]]*/ '';
+    const error = /*[[${error}]]*/ '';
+
+    if (success) {
+        alert(success);
+    }
+
+    if (error) {
+        alert(error);
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

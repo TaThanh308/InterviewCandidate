@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+    <link rel="stylesheet" th:href="@{/css/user.css}" />
+    <script th:src="@{/js/user.js}" defer></script>
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}">
+                        <span class="material-icons">person</span>Candidate</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span>Job</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}">
+                        <span class="material-icons">event</span>Interview</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{offer}">
+                        <span class="material-icons">local_offer</span>Offer</a
+                    >
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">account_circle</span>User
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:attr="onclick=|showDialog()|">
+                <span class="material-icons">logout</span>Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>User</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <section class="user-list">
+            <table>
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone No</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="userDto: ${user}">
+                    <td th:text="${userDto.username}"></td>
+                    <td th:text="${userDto.email}"></td>
+                    <td th:text="${userDto.phone}"></td>
+                    <td th:text="${userDto.role}"></td>
+                    <td th:text="${userDto.status}"></td>
+                    <td>
+                        <a th:href="@{/user/userDetail/{email}(email=${userDto.email})}" style="text-decoration: none ; color: inherit;"
+                        ><span class="material-icons" >visibility</span></a>
+                        <a th:href="@{/user/userUpdate/{email}(email=${userDto.email})}" style="text-decoration: none ; color: inherit;"
+                        ><span class="material-icons">edit</span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
+<div class="overlay" id="confirmDialog">
+    <div class="dialog">
+        <p>Are you sure you want to log out?</p>
+        <button type="button" class="btn-no" onclick="closeDialog()">Cancel</button>
+        <button type="button" class="btn-yes">Yes</button>
+    </div>
+</div>
+</body>
+</html>

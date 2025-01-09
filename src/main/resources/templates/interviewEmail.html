@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Interview Schedule</title>
+</head>
+<body>
+<h3>Dear: <span th:text="${candidateName}"></span></h3>
+<p>We are pleased to inform you of your interview schedule as follows:</p>
+
+<p><strong>Interview Schedule Title:</strong> <span th:text="${title}"></span></p>
+<p><strong>Candidate Name:</strong> <span th:text="${candidateName}"></span></p>
+<p><strong>Interview Time:</strong> <span th:text="${scheduleTime}"></span></p>
+<p><strong>Start From:</strong> <span th:text="${scheduleFrom}"></span></p>
+<p><strong>End At:</strong> <span th:text="${scheduleTo}"></span></p>
+<p><strong>Job:</strong> <span th:text="${job}"></span></p>
+<p><strong>Interviewer:</strong> <span th:text="${interviewer}"></span></p>
+<p><strong>Location:</strong> <span th:text="${location}"></span></p>
+<p><strong>Recruiter Owner:</strong> <span th:text="${recruiterOwner}"></span></p>
+<p><strong>Meeting ID:</strong> <span th:text="${meetingID}"></span></p>
+<p><strong>Notes:</strong> <span th:text="${notes}"></span></p>
+
+<p>We look forward to your response. If you have any questions, please do not hesitate to contact us.</p>
+
+<p>Sincerely,</p>
+</body>
+</html>

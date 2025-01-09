@@ -1,0 +1,248 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.sidebar {
+    position: fixed;
+    width: 150px;
+    height: 98%;
+    background-color: #2c3e50;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2cqb 0;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+.nav ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.nav li {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.nav li.active {
+    background-color: white;
+    color: #2c3e50;
+}
+
+.nav li:hover {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+.nav .material-icons {
+    margin-right: 10px;
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-item a:hover {
+    color: #2c3e50;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 110px;
+    margin-top: 120px;
+}
+
+.logout:hover {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+.logout a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.logout a:hover {
+    color: #2c3e50;
+}
+
+.logout .material-icons {
+    margin-right: 10px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    display: none; /* Hidden by default */
+}
+
+.dialog {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dialog p {
+    margin: 0 0 20px;
+}
+
+.dialog button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dialog .btn-yes {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.dialog .btn-no {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.dialog .btn-yes:hover {
+    background-color: #c0392b;
+}
+
+.dialog .btn-no:hover {
+    background-color: #27ae60;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    margin-left: 150px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 10px;
+}
+
+.top-bar h1 {
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.username {
+    margin-right: 10px;
+}
+
+.user-icon {
+    cursor: pointer;
+}
+
+form {
+    flex-wrap: wrap;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border: 1px solid #bdc3c7;
+}
+
+.form-group {
+    flex: 2;
+    min-width: 220px;
+}
+
+.form-left {
+    width: 49%;
+    float: left;
+    padding-bottom: 20px;
+}
+.form-right {
+    width: 49%;
+    float: right;
+    padding-bottom: 20px;
+}
+
+.form-group input, .form-group select {
+    display: flex;
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-actions {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-actions button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.form-actions button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.error {
+    color: red;
+    margin-top: 5px;
+}

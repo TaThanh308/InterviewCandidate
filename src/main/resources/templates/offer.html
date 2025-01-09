@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offer Management</title>
+    <link rel="stylesheet" href="/static/css/offer.css" />
+    <link rel="stylesheet" href="/static/css/cssAlert.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <a href="http://localhost:8088/login"
+            ><img src="/static/img/management-logo.jpg" alt="Management Logo"
+          /></a>
+        </div>
+        <nav class="nav">
+          <!-- Thêm đường dẫn vào các thẻ li để chuyển trang -->
+          <ul>
+            <a
+              href="http://localhost:8088/homepage"
+              style="text-decoration: none"
+            >
+              <li class="nav-item">
+                <span class="material-icons">home</span> Homepage
+              </li>
+            </a>
+            <a
+              href="http://localhost:8088/candidate"
+              style="text-decoration: none"
+            >
+              <li class="nav-item">
+                <span class="material-icons">person</span> Candidate
+              </li>
+            </a>
+            <a href="http://localhost:8088/job" style="text-decoration: none">
+              <li class="nav-item">
+                <span class="material-icons">work</span> Job
+              </li>
+            </a>
+            <a
+              href="http://localhost:8088/interview"
+              style="text-decoration: none"
+            >
+              <li class="nav-item">
+                <span class="material-icons">event</span> Interview
+              </li>
+            </a>
+            <a
+              href="http://127.0.0.1:5500/templates/offer.html"
+              style="text-decoration: none"
+            >
+              <li class="nav-item active">
+                <span class="material-icons">local_offer</span> Offer
+              </li>
+            </a>
+            <a href="http://localhost:8088/user" style="text-decoration: none">
+              <li class="nav-item">
+                <span class="material-icons">account_circle</span> User
+              </li>
+            </a>
+          </ul>
+        </nav>
+        <div class="logout">
+          <span class="material-icons">logout</span> Logout
+        </div>
+      </aside>
+      <main class="main-content">
+        <div class="h-flex">
+          <div class="top-bar">
+            <h1>Offer</h1>
+            <div class="user-info">
+              <div class="user-text">
+                <div
+                  class="username"
+                  id="username"
+                  style="font-weight: bold"
+                ></div>
+                <div class="userrole" id="userrole"></div>
+              </div>
+              <span class="material-icons user-icon">person</span>
+            </div>
+          </div>
+
+          <header>
+            <div class="header-left">
+              <div id="search">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  class="search-bar"
+                  id="search-input"
+                />
+                <div id="suggestions"></div>
+              </div>
+              <select id="department" class="status-combobox">
+                <option value="">Department</option>
+                <option value="IT">IT</option>
+                <option value="HR">HR</option>
+                <option value="Finance">Finance</option>
+                <option value="Communication">Communication</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Marketing">Accounting</option>
+              </select>
+              <select id="status" class="status-combobox">
+                <option value="">Status</option>
+                <option value="Waiting For Approval">
+                  Waiting For Approval
+                </option>
+                <option value="Waiting For Response">
+                  Waiting For Response
+                </option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Declined">Declined</option>
+              </select>
+              <button class="search-button" id="search-button">Search</button>
+              `
+            </div>
+            <a href="http://127.0.0.1:5500/templates/offerCreate.html"
+              ><button class="add-new-button">Add New</button></a
+            >
+            <button class="add-export-button" id="exportButton">Export</button>
+          </header>
+        </div>
+        <section class="candidate-list">
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th>Candidate Name</th>
+                <th>Email</th>
+                <th>Approver</th>
+                <th>Deparment</th>
+                <th>Note</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="data-container"></tbody>
+          </table>
+          <div id="pagination-container"></div>
+        </section>
+      </main>
+    </div>
+    <div id="confirmationModal" class="modal">
+      <div class="export-box">
+        <p>Export Offer</p>
+        <div class="form-group">
+          <label for="contract-period-start">Form</label>
+          <input
+            type="date"
+            id="contract-period-start"
+            name="contract-period-start"
+          />
+          <span>To</span>
+          <input
+            type="date"
+            id="contract-period-end"
+            name="contract-period-end"
+          />
+        </div>
+        <div class="modal-buttons">
+          <button id="yesButton">Yes</button>
+          <button id="noButton">No</button>
+        </div>
+      </div>
+    </div>
+    <script src="/static/js/offer.js"></script>
+  </body>
+</html>

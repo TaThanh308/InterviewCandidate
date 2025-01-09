@@ -1,0 +1,376 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.sidebar {
+    position: fixed;
+    height: 98%;
+    width: 150px;
+    background-color: #2c3e50;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.nav li {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.nav li.active {
+    background-color: white; /* Background color set to white */
+    color: black; /* Text color set to black */
+}
+
+.nav li:hover {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+.nav .material-icons {
+    margin-right: 10px;
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-item.active a {
+    color: black; /* Text color set to black */
+}
+
+.nav-item a:hover {
+    color: #2c3e50;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 110px;
+}
+
+.logout:hover {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+.logout a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.logout a:hover {
+    color: #2c3e50;
+}
+
+.logout .material-icons {
+    margin-right: 10px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    margin-left: 150px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 10px;
+}
+
+.top-bar h1 {
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.username {
+    margin-right: 10px;
+}
+
+.user-icon {
+    cursor: pointer;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 10px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    width: 300px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+}
+
+.status-combobox {
+    width: 200px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+}
+
+.search-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+}
+
+.search-button:hover {
+    background-color: #2980b9;
+}
+
+.candidate-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.candidate-list th, .candidate-list td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+.candidate-list th {
+    background-color: #34495e;
+    color: white;
+}
+
+.candidate-list tr:hover {
+    background-color: #f1f1f1;
+}
+
+.candidate-list .material-icons {
+    cursor: pointer;
+    margin-right: 5px;
+    color: inherit; /* Sử dụng màu mặc định của phần tử cha */
+    text-decoration: none; /* Loại bỏ gạch chân mặc định */
+}
+
+.candidate-list .material-icons:hover {
+    color: black; /* Màu khi di chuột qua */
+}
+
+.add-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+.import-button{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+/* CSS cho dialog */
+.confirm-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999; /* Đảm bảo hiển thị trên tất cả các phần khác */
+}
+
+.dialog-content {
+    text-align: center;
+}
+
+.dialog-content p {
+    margin-bottom: 20px;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.dialog-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: #3498db; /* Màu xanh */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #2980b9; /* Màu xanh sáng hơn khi di chuột qua */
+}
+
+.delete-button {
+    background-color: #e74c3c; /* Màu đỏ */
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c0392b; /* Màu đỏ sáng hơn khi di chuột qua */
+}
+
+/* Pagination Styles */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    border-top: 1px solid #bdc3c7;
+}
+
+.total-rows {
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+}
+
+.pagination-controls a,
+.pagination-controls span {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #3498db;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-controls a:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.pagination-controls .disabled {
+    color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.pagination-page-numbers a,
+.pagination-page-numbers span.active {
+    font-weight: bold;
+}
+
+.pagination-page-numbers span.active {
+    background-color: #3498db;
+    color: white;
+}
+th.job-id-column, td.job-id-column {
+    display: none;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.btn-outline-success {
+    color: #28a745;
+    border: 1px solid #28a745;
+    background-color: transparent;
+    background-image: none;
+}
+
+.btn-outline-success:hover {
+    color: pink;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Offer Management</title>
+    <link rel="stylesheet" href="/static/css/offerCreate.css" />
+    <link rel="stylesheet" href="/static/css/cssAlert.css">
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/static/img/management-logo.jpg" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            
+            <ul>
+                <li class="nav-item">
+                    <span class="material-icons">home</span> Homepage
+                </li>
+                
+                <li class="nav-item">
+                    <span class="material-icons">person</span> Candidate
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">work</span> Job
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">event</span> Interview
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">account_circle</span> User
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <span class="material-icons">logout</span> Logout
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="h-flex">
+            <div class="top-bar">
+                <h1>Offer</h1>
+                <div class="user-info">
+                    <div class="user-text">
+                        <div class="username" id="username" style="font-weight: bold;"></div>
+                        <div class="userrole" id="userrole"></div>
+                    </div>
+                    <span class="material-icons user-icon">person</span>
+                </div>
+            </div>
+            <header>
+                <div class="header-left">
+                    <a href="http://127.0.0.1:5500/templates/offer.html" style="color: black;">OFFER LIST </a>
+                    <i> > </i>
+                    <a href="http://127.0.0.1:5500/templates/offerCreate.html" style="color: black;"> OFFER DETAILS</a>
+                </div>
+                <p>Create to <span id="date-create"></span></p>
+
+            </header>
+        </div>
+        <form>
+            <div class="form-actions">
+                <button type="button" id="Accepted">Accepted  Offer</button>
+                <button type="button" id="Declined">Declined Offer</button>
+                <button type="button" id="cancelButton">Cancel Offer</button>
+            </div>
+            <div class="form-group">
+                <label for="candidate-name">Candidate </label>
+                <span id="candidate-name"></span>
+            </div>
+            <div class="form-group">
+                <label for="position">Position </label>
+                <span id="position"></span>
+            </div>
+            <div class="form-group">
+                <label for="approver">Approver </label>
+                <span id="Approver"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="interview-info">Interview Info</label>
+                <span id="interview-info"></span>
+                <label for="interviewer">Interviewer</label>
+                <span id="interviewer"></span>
+            </div>
+            <div class="form-group">
+                <label for="contract-period-start">Contract Period Form</label>
+                <span id="contract-period-start"></span>
+                <label for="contract-period-end">Contract Period To</label>
+                <span id="contract-period-end"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="interview-notes">Interview Notes</label>
+                <span id="interview-notes"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label for="contract-type">Contract Type </label>
+                <span id="contract-type"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label for="level">Level </label>
+                <span id="Level"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label for="department">Department </label>
+                <span id="department"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label for="recruiter-owner">Recruiter Owner </label>
+                <span id="recruiter-owner"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label for="due-date">Due Date </label>
+                <span id="due-date"></span>
+            </div>
+            <div class="form-group">
+                <label for="basic-salary">Basic Salary </label>
+                <span id="basic-salary"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="note">Note</label>
+                <span id="note"></span>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <span id="status"></span>
+            </div>
+            <div class="form-actions">
+                <button type="button">Cancel</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to cancel this offer?</p>
+        <div class="modal-buttons">
+            <button id="yesButton">Yes</button>
+            <button id="noButton">No</button>
+        </div>
+    </div>
+</div>
+<script src="/static/js/offerCandidate.js"></script>
+</body>
+</html>

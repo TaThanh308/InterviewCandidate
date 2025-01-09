@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset Password</title>
+    <link rel="stylesheet" th:href="@{/css/resetPass.css}" />
+    <script th:src="@{/js/resetPass.js}" defer></script>
+</head>
+<body>
+<div class="container">
+    <main class="main-content">
+        <div class="resetPass-container">
+            <form class="resetPass-form" th:action="@{/reset-password}" method="post">
+                <h1 class="resetPass-heading">Reset Password</h1>
+                <input type="hidden" name="token" th:value="${token}" />
+                <p>Please set your new password</p>
+                <div class="form-group">
+                    <label class="input-label" for="password">New Password</label>
+                    <input type="password" id="password" name="password" required />
+                </div>
+                <div class="form-group">
+                    <label class="input-label" for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required />
+                </div>
+                <button type="submit" class="resetPass-button">Reset</button>
+            </form>
+            <p th:text="${error}" style="color: red"></p>
+            <p th:text="${message}" style="color: forestgreen"></p>
+        </div>
+    </main>
+</div>
+</body>
+</html>

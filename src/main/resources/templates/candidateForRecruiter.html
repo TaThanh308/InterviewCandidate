@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Candidate Management For Recruiter</title>
+    <link rel="stylesheet" th:href="@{/css/candidate.css}"/>
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo"/>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item">
+                    <a th:href="@{/homepage}">
+                        <span class="material-icons">home</span>Homepage
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">person</span> Candidate
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span> Job
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}">
+                        <span class="material-icons">event</span> Interview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/user}">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:href="@{/login}">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>Candidate</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <header>
+            <div class="header-left">
+                <form id="searchForm" method="get" action="/candidate/searchByRecruiter">
+                    <input type="text" name="keyword" placeholder="Search..." class="search-bar"
+                           th:value="${keyword}"/>
+                    <select class="status-combobox" name="status">
+                        <option value="">Status</option>
+                        <option value="Open"> Open</option>
+                        <option value="Banned">Banned</option>
+                        <option value="Waiting for interview">Waiting for interview</option>
+                        <option value="Cancelled interview">Cancelled interview</option>
+                        <option value="Passed interview">Passed interview</option>
+                        <option value="Failed interview">Failed interview</option>
+                        <option value="Waiting for approval">Waiting for approval</option>
+                        <option value="Approved offer">Approved offer</option>
+                        <option value="Rejected offer">Rejected offer</option>
+                        <option value="Waiting for response">Waiting for response</option>
+                        <option value="Accepted offer">Accepted offer</option>
+                        <option value="Declined offer">Declined offer</option>
+                        <option value="Cancelled offer">Cancelled offer</option>
+                    </select>
+                    <button class="search-button">Search</button>
+                </form>
+            </div>
+            <button class="add-new-button">Add New</button>
+        </header>
+        <section class="candidate-list">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone No</th>
+                    <th>Current Position</th>
+                    <th>Owner HR</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(candidateList)}" class="no-result-row">
+                    <td class="no-result-cell" colspan="7">No result found!</td>
+                </tr>
+                <tr th:each="candidate : ${candidateList}">
+                    <td th:text="${candidate.name}"></td>
+                    <td th:text="${candidate.email}"></td>
+                    <td th:text="${candidate.phone}"></td>
+                    <td th:text="${candidate.position}"></td>
+                    <td th:text="${candidate.recruiterUsername}"></td>
+                    <td th:text="${candidate.status}"></td>
+                    <td>
+                        <input type="hidden" th:value="${candidate.id}"/>
+                        <a th:href="@{/candidate/detail/{id}(id=${candidate.id})}" class="material-icons"
+                        >visibility</a>
+                        <a th:href="@{/candidate/form/update/{id}(id=${candidate.id})}" class="material-icons"
+                        >edit</a>
+                        <span class="material-icons" th:attr="onclick=|showDialog('${candidate.email}')|"
+                        >delete</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <div class="pagination-container" th:if="${totalElements != 0}">
+            <div class="total-rows">
+                <span th:text="'Total Candidates: ' + ${totalElements}"></span><br>
+                <span th:text="'Total Pages: ' + ${totalPages}"></span>
+            </div>
+            <div class="pagination-controls">
+        <span th:with="startPage=${currentPage > 1 ? currentPage - 1 : 1}, endPage=${currentPage + 1 > totalPages ? totalPages : currentPage + 1}">
+            <span th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                <a th:if="${i != currentPage}"
+                   th:href="@{${(keyword != null || status != null) ? '/candidate/searchByRecruiter?page=' + (i - 1) + '&keyword=' + keyword + '&status=' + status :
+                   '/candidate/recruiter/' + username + '?page=' + (i - 1)}}"
+                   th:text="${i}"></a>
+                <span th:if="${i == currentPage}" th:text="${i}" class="current"></span>
+            </span>
+        </span>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<div class="overlay" id="confirmDialog">
+    <form class="dialog" method="post" action="" id="deleteForm">
+        <p class="mess">Are you sure you want to delete this candidate?</p>
+        <button type="submit" class="btn-yes">Yes</button>
+        <button type="button" class="btn-no" onclick="closeDialog()">No</button>
+    </form>
+</div>
+
+<script>
+    function showDialog(email) {
+        const form = document.getElementById("deleteForm");
+        form.action = `/candidate/delete/${email}`;
+        document.getElementById("confirmDialog").style.display = "flex";
+    }
+
+    function closeDialog() {
+        document.getElementById("confirmDialog").style.display = "none";
+    }
+
+    document
+        .querySelector(".add-new-button")
+        .addEventListener("click", function () {
+            window.location.href = "/candidate/form/create";
+        });
+</script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const success = /*[[${success}]]*/ '';
+    const error = /*[[${error}]]*/ '';
+
+    if (success) {
+        alert(success);
+    }
+
+    if (error) {
+        alert(error);
+    }
+    /*]]>*/
+</script>
+
+</body>
+</html>

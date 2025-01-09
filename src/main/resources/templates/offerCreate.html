@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offer Management</title>
+    <link rel="stylesheet" href="/static/css/offerCreate.css" />
+    <link rel="stylesheet" href="/static/css/cssAlert.css">
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/static/img/management-logo.jpg" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <!-- Thêm đường dẫn vào các thẻ li để chuyển trang -->
+            <ul>
+                <li class="nav-item" >
+                    <span class="material-icons">home</span> Homepage
+                </li>
+                <!-- Đến trang nào thì thêm active vào sau nav-item để hiển thị màu trắng -->
+                <li class="nav-item">
+                    <span class="material-icons">person</span> Candidate
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">work</span> Job
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">event</span> Interview
+                </li>
+                <li class="nav-item active">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">account_circle</span> User
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <span class="material-icons">logout</span> Logout
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="h-flex">
+            <div class="top-bar">
+                <h1>Offer</h1>
+                <div class="user-info">
+                    <div class="user-text">
+                        <div class="username" id="username" style="font-weight: bold;"></div>
+                        <div class="userrole" id="userrole"></div>
+                    </div>
+                    <span class="material-icons user-icon">person</span>
+                </div>
+            </div>
+            <header >
+                <div class="header-left" >
+                    <a href="http://127.0.0.1:5500/templates/offer.html" style="color: black;">OFFER LIST</a>
+                    <i>></i>
+                    <a href="http://127.0.0.1:5500/templates/offerCreate.html"style="color: black;">CREATE OFFER</a>
+                </div>
+
+            </header>
+        </div>
+        <div class="form-create">
+            <form>
+                <div class="form-group">
+                    <label for="candidate">Candidate </label>
+                    <select id="candidate" name="candidate">
+                        <option value="">Select Candidate Name</option>
+                        <!-- Add options for candidate names -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="position">Position </label>
+                    <select id="position" name="position">
+                        <option value="">Select a Position</option>
+                        <!-- Add options for positions -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="approver">Approver </label>
+                    <select id="approver" name="approver">
+                        <option value="">Select an approver</option>
+                        <!-- Add options for approvers -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="interview-info">Interview Info</label>
+                    <select id="interview-info" name="interview-info">
+                        <option value="">Select an interview schedule title</option>
+                        <!-- Add options for interview schedule titles -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="contract-period-start">Contract Period Form</label>
+                    <input type="date" id="contract-period-start" name="contract-period-start">
+                    <span>To</span>
+                    <input type="date" id="contract-period-end" name="contract-period-end">
+                    <div id="error-message" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="interview-notes">Interview Notes</label>
+                    <textarea id="interview-notes" name="interview-notes"></textarea>
+                    <div id="interview-notes-error-message" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contract-type">Contract Type </label>
+                    <select id="contracttype" name="contract-type">
+                        <option value="">Select a type of contract</option>
+                        <!-- Add options for contract types -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="level">Level </label>
+                    <select id="level" name="level">
+                        <option value="">Select a level</option>
+                        <!-- Add options for levels -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Department </label>
+                    <select id="department" name="department">
+                        <option value="">Select a department</option>
+                        <!-- Add options for departments -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recruiter-owner">Recruiter Owner </label>
+                    <select id="recruiter-owner" name="recruiter-owner">
+                        <option value="">Select a Recruiter Owner</option>
+                        
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="due-date">Due Date </label>
+                    <input type="date" id="due-date" name="due-date">
+                    <div id="due-date-error-message" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="basic-salary">Basic Salary </label>
+                    <input type="text" id="basic-salary" name="basic-salary" placeholder="Enter basic salary">
+                    <div id="salary-error-message" class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <input type="text" id="note" name="note" placeholder="Type a note">
+                </div>
+
+                <div class="form-actions">
+                    <button id="submit" type="button">Submit</button>
+                    <button id="cancelButton" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to cancel this offer?</p>
+        <div class="modal-buttons">
+            <button id="yesButton">Submit</button>
+            <button id="noButton">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/offerCreate.js"></script>
+<link rel="stylesheet" href="/templates/css/cssAlert.css">
+</body>
+</html>

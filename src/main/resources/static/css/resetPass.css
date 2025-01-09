@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-content {
+    text-align: center;
+    width: 450px;
+}
+
+.resetPass-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+.resetPass-heading {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    text-align: center;
+}
+
+.resetPass-form {
+    max-width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+}
+.resetPass-form p{
+    margin-top: -10px;
+    text-align: center;
+}
+
+.form-group {
+    text-align: right;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="password"] {
+    width: 230px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #60a9da;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+

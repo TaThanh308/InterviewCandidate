@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-content {
+    text-align: center;
+}
+
+.forgotPass-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+.forgotPass-heading {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    text-align: center;
+}
+
+.forgotPass-form {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.forgotPass-form p{
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.email {
+    width: 320px; /* Thu ngắn thanh tìm kiếm */
+    padding: 5px;
+    margin-top: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+}
+
+.input-label {
+    top: 10px;
+    left: 10px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    font-weight: bold;
+
+}
+
+.input-label.active {
+    top: -15px;
+    font-size: 15px;
+    color: #000000;
+}
+
+.form-actions {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-actions button[type="submit"] {
+    background-color: #60a9da;
+    color: white;
+}
+
+.form-actions button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}

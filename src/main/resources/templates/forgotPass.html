@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forgot Password</title>
+    <link rel="stylesheet" th:href="@{/css/forgotPass.css}" />
+    <script th:src="@{/js/forgotPass.js}" defer></script>
+</head>
+<body>
+<div class="container">
+    <main class="main-content">
+        <div class="forgotPass-container">
+            <form class="forgotPass-form" th:action="@{/forgot-password}" method="post">
+                <h1 class="forgotPass-heading">Forgot Password</h1>
+                <p>Please enter your email<br>and we'll send you a link to get back your account</p>
+                <div class="form-group">
+                    <label class="input-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="email" required />
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-button">Send</button>
+                    <button type="button" class="cancel-button">Cancel</button>
+                </div>
+            </form>
+            <p th:text="${error}" style="color: red"></p>
+            <p th:text="${message}" style="color: forestgreen"></p>
+        </div>
+    </main>
+</div>
+</body>
+</html>

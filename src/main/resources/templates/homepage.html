@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+    <link rel="stylesheet" th:href="@{/css/candidate.css}" />
+    <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/img/management-logo.jpg}" alt="Management Logo" />
+        </div>
+        <nav class="nav">
+            <ul>
+                <li class="nav-item active">
+                    <span class="material-icons">home</span> Homepage
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/candidate}">
+                        <span class="material-icons">person</span> Candidate
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/job}">
+                        <span class="material-icons">work</span> Job
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/interview}">
+                        <span class="material-icons">event</span> Interview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <span class="material-icons">local_offer</span> Offer
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/user}">
+                        <span class="material-icons">account_circle</span> User
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout">
+            <a th:href="@{/login}">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="top-bar">
+            <h1>Homepage</h1>
+            <div class="user-info">
+                <span class="username" th:text="${username}"></span>
+                <span class="material-icons user-icon">person</span>
+            </div>
+        </div>
+        <div class="chart-row">
+            <div class="chart-container-status">
+                <h3>Opening Candidates</h3>
+                <p th:text="${openCandidates}"></p>
+            </div>
+            <div class="chart-container-status">
+                <h3>Interviewing Candidates</h3>
+                <p th:text="${interviewingCandidates}"></p>
+            </div>
+            <div class="chart-container-status">
+                <h3>Offering Candidates</h3>
+                <p th:text="${offeringCandidates}"></p>
+            </div>
+            <div class="chart-container-status">
+                <h3>Banned Candidates</h3>
+                <p th:text="${bannedCandidates}"></p>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="candidate-position-chart"></canvas>
+        </div>
+        <script>
+            async function getCandidatePositionData() {
+                const response = await fetch('/homepage/count-by-position');
+                const data = await response.json();
+
+                const positions = data.map(item => item.position)
+                const counts = data.map(item => item.count)
+
+                const ctx = document.getElementById('candidate-position-chart').getContext('2d');
+                const PositionChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: positions,
+                        datasets: [{
+                            label: 'Number of Candidates',
+                            data: counts,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Number of Candidates by Position',
+                                font: {
+                                    size: 20
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            getCandidatePositionData();
+        </script>
+        <div class="chart-row">
+            <div class="chart-container-status">
+                <h3>Admin Users</h3>
+                <p th:text="${adminUsers}"></p>
+            </div>
+            <div class="chart-container-status">
+                <h3>Manager Users</h3>
+                <p th:text="${managerUsers}"></p>
+            </div>
+            <div class="chart-container-status">
+                <h3>Recruiter Users</h3>
+                <p th:text="${recruiterUsers}"></p>
+            </div>
+            <div class="chart-container-status">
+                <h3>Interviewer Users</h3>
+                <p th:text="${interviewerUsers}"></p>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="interviewers-ranking-chart"></canvas>
+        </div>
+        <script>
+            async function getInterviewerData() {
+                const response = await fetch('/homepage/list-interviewer-by-interviews');
+                const data = await response.json();
+
+                const usernames = data.map(item => item.username);
+                const counts = data.map(item => item.count);
+
+                const ctx = document.getElementById('interviewers-ranking-chart').getContext('2d');
+                const InterviewersRankingChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: usernames,
+                        datasets: [{
+                            label: 'Number of Interviews',
+                            data: counts,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Interviewers have the most interviews',
+                                font: {
+                                    size: 20
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            getInterviewerData();
+        </script>
+    </main>
+</div>
+</body>
+</html>
